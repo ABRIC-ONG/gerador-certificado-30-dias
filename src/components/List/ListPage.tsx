@@ -11,7 +11,7 @@ export const ListPage = (props: ListPageProps) => {
     setProjectIndex(projectIndex + indexIncrement);
   };
 
-  return (
+  return projectCount > 1 ? (
     <div className="flex justify-between items-center flex-1 mt-8">
       <button
         disabled={projectIndex === 0}
@@ -34,5 +34,7 @@ export const ListPage = (props: ListPageProps) => {
         Próximo
       </button>
     </div>
+  ) : (
+    <></>
   );
 };

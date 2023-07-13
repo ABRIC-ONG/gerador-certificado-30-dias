@@ -5,14 +5,14 @@ import { Form } from "./components/Form";
 import { List } from "./components/List";
 
 function App() {
-  const [projects, setProjects] = useState<Project[]>([]);
+  const [people, setPeople] = useState<Person[]>([]);
 
   return (
     <>
       <Header />
       <main className="flex flex-col items-center mb-4 md:mb-0 md:min-h-screen md:justify-evenly lg:w-screen lg:flex-row">
-        <Form setProjects={setProjects} projects={projects} />
-        <List projects={projects} />
+        <Form setPeople={setPeople} people={people} />
+        <List people={people} />
       </main>
       <footer className="hidden md:flex justify-center w-full md:fixed bottom-0 justify-self-center bg-gray-300 py-2">
         <span className="font-semi text-primary">

@@ -1,55 +1,56 @@
 import { useEffect, useState } from "react";
 import { ListPage } from "./List/ListPage";
-import { ProjectAuthors } from "./List/ProjectAuthors";
+import { PersonCPF } from "./List/PersonCPF";
 import { GeneratorButton } from "./GeneratorButton";
+import { GenerateAllButton } from "./GenerateAllButton";
 
 interface ListProps {
-  projects: Project[];
+  people: Person[];
 }
 
-const initialProjectIndex = 0;
+const initialPeopleIndex = 0;
 
 const List = (props: ListProps) => {
-  const { projects } = props;
-  const [projectIndex, setProjectIndex] = useState<number>(initialProjectIndex);
-  const [selectedProject, setSelectedProject] = useState<Project>(
-    projects[initialProjectIndex]
+  const { people: people } = props;
+  const [personIndex, setPersonIndex] = useState<number>(initialPeopleIndex);
+  const [selectedPerson, setSelectedPerson] = useState<Person>(
+    people[initialPeopleIndex]
   );
 
   useEffect(() => {
-    const newIndex = projects.length - 1;
-    setProjectIndex(newIndex);
-    setSelectedProject(projects[newIndex]);
-  }, [projects]);
+    const newIndex = people.length - 1;
+    setPersonIndex(newIndex);
+    setSelectedPerson(people[newIndex]);
+  }, [people]);
 
   useEffect(() => {
-    setSelectedProject(projects[projectIndex]);
-  }, [projectIndex]);
+    setSelectedPerson(people[personIndex]);
+  }, [personIndex]);
 
   return (
     <div className="flex flex-col items-center w-full max-w-xl lg:w-1/2 lg:max-w-3xl">
       <h2 className="font-bold text-xl mb-4 lg:text-3xl">
-        {projects.length} projeto(s) cadastrados
+        {people.length} pessoa(s) cadastradas
       </h2>
       <div className="p-4 flex flex-col text-lg w-[90%] bg-gray-200">
-        {projects?.length > 0 ? (
+        {people?.length > 0 ? (
           <>
+            <h2 className="font-bold text-xl mb-4 lg:text-xl">Nome completo</h2>
             <p className="font-semibold text-lg mb-2 lg:text-xl">
-              {selectedProject?.title}
+              {selectedPerson?.name}
             </p>
-            <ProjectAuthors
-              authors={selectedProject?.authors || ([] as Author[])}
-            />
+            <PersonCPF cpf={selectedPerson?.cpf} />
             <ListPage
-              projectIndex={projectIndex}
-              setProjectIndex={setProjectIndex}
-              projectCount={projects.length ?? 0}
+              projectIndex={personIndex}
+              setProjectIndex={setPersonIndex}
+              projectCount={people.length ?? 0}
             />
-            <GeneratorButton selectedProject={selectedProject} />
+            <GeneratorButton selectedPerson={selectedPerson} />
+            <GenerateAllButton people={people} />
           </>
         ) : (
           <>
-            <h1>Nenhum projeto cadastrado.</h1>
+            <h1>Nenhuma pessoa cadastrada.</h1>
           </>
         )}
       </div>
