@@ -1,7 +1,6 @@
 import download from "downloadjs";
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import certificatePath from "../assets/certificate_template.pdf";
-import { useMemo } from "react";
 
 interface GenerateAllButtonProps {
   people: Person[];
