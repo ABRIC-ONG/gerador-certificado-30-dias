@@ -1,6 +1,6 @@
 {
-  "homepage": "leoprietsch.github.io/certificate-generator",
-  "name": "certificate-generator",
+  "homepage": "leoprietsch.github.io/certificate-generator-tdc",
+  "name": "certificate-generator-tdc",
   "private": true,
   "version": "1.0.0",
   "type": "module",
