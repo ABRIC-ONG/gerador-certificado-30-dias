@@ -1,6 +1,6 @@
 {
-  "homepage": "https://leoprietsch.github.io/certificate-generator-tdc",
-  "name": "certificate-generator-tdc",
+  "homepage": "https://abric-ong.github.io/gerador-certificado-30-dias",
+  "name": "gerador-certificado-30-dias",
   "private": true,
   "version": "1.0.0",
   "type": "module",
