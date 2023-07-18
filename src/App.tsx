@@ -14,18 +14,6 @@ function App() {
         <Form setPeople={setPeople} people={people} />
         <List people={people} />
       </main>
-      <footer className="hidden md:flex justify-center w-full md:fixed bottom-0 justify-self-center bg-gray-300 py-2">
-        <span className="font-semi text-primary">
-          Desenvolvido por @
-          <a
-            href="https://github.com/leoprietsch"
-            className="appearance-none underline text-darkPrimary hover:cursor-pointer"
-          >
-            leoprietsch
-          </a>
-          .
-        </span>
-      </footer>
     </>
   );
 }
