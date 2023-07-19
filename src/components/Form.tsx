@@ -15,9 +15,20 @@ const initialPerson: Person = {
 const Form = (props: FormProps) => {
   const [person, setPerson] = useState<Person>(initialPerson);
 
+  const data: () => string = () => {
+    const date = person.dataEmissao;
+    const stringDate =
+      date.getFullYear() +
+      "-" +
+      ("0" + (date.getMonth() + 1)).slice(-2) +
+      "-" +
+      ("0" + date.getDate()).slice(-2);
+    return stringDate;
+  };
+
   const addPerson = () => {
     props.setPeople([...props.people, person]);
-    setPerson(initialPerson);
+    setPerson({ ...initialPerson, dataEmissao: person.dataEmissao });
   };
 
   return (
@@ -63,6 +74,7 @@ const Form = (props: FormProps) => {
       <input
         id="dataEmissao"
         type="date"
+        value={data()}
         onChange={(e) => {
           const dateInput = e.currentTarget.value; // yyyy-mm-dd string format from date input
           let dateParts = dateInput.split("-").map(Number); // split date values
