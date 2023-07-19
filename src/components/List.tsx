@@ -3,6 +3,8 @@ import { ListPage } from "./List/ListPage";
 import { PersonCPF } from "./List/PersonCPF";
 import { GeneratorButton } from "./GeneratorButton";
 import { GenerateAllButton } from "./GenerateAllButton";
+import { DataEmissao } from "./List/DataEmissao";
+import { NomeCompleto } from "./List/NomeCompleto";
 
 interface ListProps {
   people: Person[];
@@ -35,11 +37,9 @@ const List = (props: ListProps) => {
       <div className="p-4 flex flex-col text-lg w-[90%] bg-gray-200">
         {people?.length > 0 ? (
           <>
-            <h2 className="font-bold text-xl mb-4 lg:text-xl">Nome completo</h2>
-            <p className="font-semibold text-lg mb-2 lg:text-xl">
-              {selectedPerson?.name}
-            </p>
+            <NomeCompleto nome={selectedPerson?.name} />
             <PersonCPF cpf={selectedPerson?.cpf} />
+            <DataEmissao dataEmissao={selectedPerson?.dataEmissao} />
             <ListPage
               projectIndex={personIndex}
               setProjectIndex={setPersonIndex}

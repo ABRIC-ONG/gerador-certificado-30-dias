@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { cpfMask } from "../utils/CPFMask";
-import ReactDatePicker from "react-datepicker";
 
 interface FormProps {
   setPeople: React.Dispatch<React.SetStateAction<Person[]>>;
@@ -55,10 +54,30 @@ const Form = (props: FormProps) => {
           setPerson({ ...person, cpf: cpfMask(e.currentTarget.value) })
         }
       />
+      <label
+        htmlFor="dataEmissao"
+        className="text-primary font-semibold text-lg md:text-xl"
+      >
+        Data de emissão
+      </label>
+      <input
+        id="dataEmissao"
+        type="date"
+        onChange={(e) => {
+          const dateInput = e.currentTarget.value; // yyyy-mm-dd string format from date input
+          let dateParts = dateInput.split("-").map(Number); // split date values
+          dateParts[1]--; // fix the current month to use as index of month in Date constructor
+          setPerson({
+            ...person,
+            dataEmissao: new Date(dateParts[0], dateParts[1], dateParts[2]),
+          });
+        }}
+        className="mb-4 flex appearance-none border bg-gray-100 p-2 md:text-xl focus:bg-white focus:outline-darkPrimary"
+      />
       <button
         type="button"
         onClick={addPerson}
-        disabled={!person?.name || !person?.cpf}
+        disabled={!person?.name || !person?.cpf || !person?.dataEmissao}
         className="px-16 text-white bg-primary font-bold py-2  md:text-xl disabled:opacity-75 md:py-4"
       >
         Adicionar pessoa

@@ -6,8 +6,9 @@ import certificatePath from "../assets/certificate_template.pdf";
 
 const NAME_FONT_SIZE = 32;
 const CPF_FONT_SIZE = 18;
+const DATE_FONT_SIZE = 15;
 const TEXT_MAX_WIDTH = 700;
-const TEXT_COLOR = rgb(0.208, 0.635, 0.271);
+const TEXT_COLOR = rgb(0, 0.647, 0.169);
 
 export const generateCertificate = async (person: Person) => {
   const certificateTemplate = await fetch(certificatePath).then((res) =>
@@ -16,6 +17,12 @@ export const generateCertificate = async (person: Person) => {
   const roboto = await fetch(robotoPath).then((res) => res.arrayBuffer());
 
   const { cpf, name } = person;
+
+  const dataEmissao = person?.dataEmissao?.toLocaleDateString("pt-BR", {
+    day: "2-digit",
+    year: "numeric",
+    month: "long",
+  });
 
   const pdf = await PDFDocument.load(certificateTemplate);
 
@@ -50,6 +57,16 @@ export const generateCertificate = async (person: Person) => {
     font,
     x: pdfWidth / 2 - titleLineWidth / 2 - 9,
     color: TEXT_COLOR,
+  });
+
+  const dateLineHeight = font.heightAtSize(CPF_FONT_SIZE);
+  const dateLineWidth = font.widthOfTextAtSize(dataEmissao, DATE_FONT_SIZE);
+
+  pdfPage.drawText(dataEmissao, {
+    y: 222.5 - dateLineHeight / 2,
+    size: DATE_FONT_SIZE,
+    font,
+    x: pdfWidth - dateLineWidth - 150,
   });
 
   const pdfTitle = ["Certificado", name].join(" - ");
