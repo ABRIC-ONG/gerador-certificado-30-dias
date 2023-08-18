@@ -11,7 +11,7 @@ const initialPerson: Person = {
   name: "",
   cpf: "",
   dataEmissao: new Date(),
-  certificationType: CertificationType.Mentee,
+  tipoCertificado: CertificationType.Mentee,
 };
 
 const Form = (props: FormProps) => {
@@ -33,7 +33,7 @@ const Form = (props: FormProps) => {
     setPerson({
       ...initialPerson,
       dataEmissao: person.dataEmissao,
-      certificationType: person.certificationType,
+      tipoCertificado: person.tipoCertificado,
     });
   };
 
@@ -83,11 +83,11 @@ const Form = (props: FormProps) => {
         name="type"
         className="mb-4 flex appearance-none border bg-gray-100 p-2 md:text-xl focus:bg-white focus:outline-darkPrimary"
         placeholder="Ex.: 123.456.789-10"
-        value={person.certificationType}
+        value={person.tipoCertificado}
         onChange={(e) =>
           setPerson({
             ...person,
-            certificationType: e.currentTarget
+            tipoCertificado: e.currentTarget
               .value as unknown as CertificationType,
           })
         }

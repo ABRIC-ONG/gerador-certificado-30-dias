@@ -8,5 +8,5 @@ export interface Person {
   name: string;
   cpf: string;
   dataEmissao: Date;
-  certificationType: CertificationType;
+  tipoCertificado: CertificationType;
 }
