@@ -5,6 +5,7 @@ import { GeneratorButton } from "./GeneratorButton";
 import { GenerateAllButton } from "./GenerateAllButton";
 import { DataEmissao } from "./List/DataEmissao";
 import { NomeCompleto } from "./List/NomeCompleto";
+import { Person } from "../entities/Person";
 
 interface ListProps {
   people: Person[];

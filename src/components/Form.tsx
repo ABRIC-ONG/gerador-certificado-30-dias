@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { cpfMask } from "../utils/CPFMask";
+import { Person, CertificationType } from "../entities/Person";
 
 interface FormProps {
   setPeople: React.Dispatch<React.SetStateAction<Person[]>>;
@@ -10,6 +11,7 @@ const initialPerson: Person = {
   name: "",
   cpf: "",
   dataEmissao: new Date(),
+  certificationType: CertificationType.Mentee,
 };
 
 const Form = (props: FormProps) => {
@@ -28,7 +30,11 @@ const Form = (props: FormProps) => {
 
   const addPerson = () => {
     props.setPeople([...props.people, person]);
-    setPerson({ ...initialPerson, dataEmissao: person.dataEmissao });
+    setPerson({
+      ...initialPerson,
+      dataEmissao: person.dataEmissao,
+      certificationType: person.certificationType,
+    });
   };
 
   return (
@@ -65,6 +71,34 @@ const Form = (props: FormProps) => {
           setPerson({ ...person, cpf: cpfMask(e.currentTarget.value) })
         }
       />
+
+      <label
+        htmlFor="type"
+        className="text-primary font-semibold text-lg md:text-xl"
+      >
+        Tipo de certificado
+      </label>
+      <select
+        id="type"
+        name="type"
+        className="mb-4 flex appearance-none border bg-gray-100 p-2 md:text-xl focus:bg-white focus:outline-darkPrimary"
+        placeholder="Ex.: 123.456.789-10"
+        value={person.certificationType}
+        onChange={(e) =>
+          setPerson({
+            ...person,
+            certificationType: e.currentTarget
+              .value as unknown as CertificationType,
+          })
+        }
+      >
+        <option value={CertificationType.Mentor}>Mentores</option>
+        <option value={CertificationType.Training}>
+          Capacitação de Mentores
+        </option>
+        <option value={CertificationType.Mentee}>Mentorados</option>
+      </select>
+
       <label
         htmlFor="dataEmissao"
         className="text-primary font-semibold text-lg md:text-xl"
